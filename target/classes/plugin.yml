@@ -1,0 +1,24 @@
+name: NexusMenus
+version: '1.0'
+main: cc.synkdev.nexusMenus.NexusMenus
+description: "An easy in-game GUI builder allowing different GUI types, rows and pages"
+api-version: '1.21'
+authors: [ Synk_ ]
+softdepend:
+  - PlaceholderAPI
+permissions:
+  nexusmenus.command.nexusmenus:
+    description: "Main plugin command, opens the main menu."
+    default: op
+  nexusmenus.command.reload:
+    description: "Reloads the plugin."
+    default: op
+  nexusmenus.cooldown.bypass:
+    description: "Bypasses the cooldown for the menu item."
+    default: op
+  nexusmenus.command.edit:
+    description: "Opens the menu editor."
+    default: op
+  nexusmenus.manager:
+    description: "Opens the menu manager."
+    default: op

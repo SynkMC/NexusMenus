@@ -1,0 +1,22 @@
+global-fallback-item:
+  material: BARRIER
+  name: "<red>No Access"
+  lore:
+    - "<gray>You do not have permission"
+    - "<gray>to use this item."
+global-cooldown-fallback-item:
+  material: BARRIER
+  name: "<red>On cooldown"
+  lore:
+    - "<gray>You cannot use this item for now!"
+editing:
+  allow-middle-click-clone: true
+  default-container-type: CHEST
+  default-rows: 3
+commands:
+  require-operator: true
+permissions:
+  require-op-for-menu-creation: true
+  menu-creation-permission: "simplemenus.create"
+behavior:
+  auto-reload-menus: true
