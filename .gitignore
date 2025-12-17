@@ -1,3 +1,4 @@
 /.idea/
 /nexusmenus.iml
 /target/
+.gitignore

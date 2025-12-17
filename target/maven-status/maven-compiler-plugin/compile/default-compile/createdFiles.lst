@@ -1,6 +1,5 @@
 cc\synkdev\nexusMenus\ConfigManager.class
 cc\synkdev\nexusMenus\NexusMenus.class
-cc\synkdev\nexusMenus\Messages.class
 cc\synkdev\nexusMenus\objects\CooldownProfile.class
 cc\synkdev\nexusMenus\gui\CreationGui.class
 cc\synkdev\nexusMenus\gui\MaterialPickerGUI.class

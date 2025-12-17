@@ -6,6 +6,7 @@ api-version: '1.21'
 authors: [ Synk_ ]
 softdepend:
   - PlaceholderAPI
+  - NexusCore
 permissions:
   nexusmenus.command.nexusmenus:
     description: "Main plugin command, opens the main menu."

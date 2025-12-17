@@ -1,14 +1,14 @@
 package cc.synkdev.nexusMenus;
 
+import cc.synkdev.nexusCore.bukkit.Analytics;
+import cc.synkdev.nexusCore.bukkit.Lang;
+import cc.synkdev.nexusCore.components.NexusPlugin;
 import cc.synkdev.nexusMenus.commands.DynamicCommand;
 import cc.synkdev.nexusMenus.commands.MainCmd;
 import cc.synkdev.nexusMenus.commands.MenuCommandHandler;
 import cc.synkdev.nexusMenus.events.PlayerListener;
 import cc.synkdev.nexusMenus.objects.PluginGui;
 import cc.synkdev.nexusMenus.objects.PluginItem;
-import cc.synkdev.synkLibs.bukkit.Analytics;
-import cc.synkdev.synkLibs.bukkit.Lang;
-import cc.synkdev.synkLibs.components.SynkPlugin;
 import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.MessageKeys;
 import dev.triumphteam.gui.components.GuiType;
@@ -29,7 +29,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.*;
 
-public final class NexusMenus extends JavaPlugin implements SynkPlugin {
+public final class NexusMenus extends JavaPlugin implements NexusPlugin {
     @Getter private static NexusMenus instance;
     public Map<String, PluginGui> guiMap = new HashMap<>();
     public Map<String, UUID> guiEditors = new HashMap<>();
@@ -51,16 +51,6 @@ public final class NexusMenus extends JavaPlugin implements SynkPlugin {
     public void onEnable() {
         instance = this;
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
-        BukkitCommandManager bcm = new BukkitCommandManager(this);
-        bcm.registerCommand(new MainCmd());
-        bcm.getCommandCompletions().registerCompletion("types", h -> Arrays.stream(GuiType.values())
-                .map(GuiType::name)
-                .toList());
-        bcm.usePerIssuerLocale(false);
-        bcm.getLocales().addMessage(bcm.getLocales().getDefaultLocale(), MessageKeys.PERMISSION_DENIED, Lang.translate("commands.no-perm", this));
-        bcm.getLocales().addMessage(bcm.getLocales().getDefaultLocale(), MessageKeys.NOT_ALLOWED_ON_CONSOLE, Lang.translate("commands.console-error", this));
-        bcm.getLocales().addMessage(bcm.getLocales().getDefaultLocale(), MessageKeys.UNKNOWN_COMMAND, Lang.translate("commands.not-exist", this));
 
         new Metrics(this, 27067);
         Analytics.registerSpl(this);
@@ -72,6 +62,17 @@ public final class NexusMenus extends JavaPlugin implements SynkPlugin {
 
         initCooldown();
         CooldownManager.setup(cooldownConfig);
+
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        BukkitCommandManager bcm = new BukkitCommandManager(this);
+        bcm.registerCommand(new MainCmd());
+        bcm.getCommandCompletions().registerCompletion("types", h -> Arrays.stream(GuiType.values())
+                .map(GuiType::name)
+                .toList());
+        bcm.usePerIssuerLocale(false);
+        bcm.getLocales().addMessage(bcm.getLocales().getDefaultLocale(), MessageKeys.PERMISSION_DENIED, Lang.translate("commands.no-perm", this));
+        bcm.getLocales().addMessage(bcm.getLocales().getDefaultLocale(), MessageKeys.NOT_ALLOWED_ON_CONSOLE, Lang.translate("commands.console-error", this));
+        bcm.getLocales().addMessage(bcm.getLocales().getDefaultLocale(), MessageKeys.UNKNOWN_COMMAND, Lang.translate("commands.not-exist", this));
 
         initFolder();
         loadMenus();
@@ -100,7 +101,7 @@ public final class NexusMenus extends JavaPlugin implements SynkPlugin {
 
     public void reloadLang() {
         langMap.clear();
-        langMap.putAll(cc.synkdev.synkLibs.bukkit.Lang.init(this, langFile));
+        langMap.putAll(cc.synkdev.nexusCore.bukkit.Lang.init(this, langFile));
     }
 
     private void updateConfig() {
@@ -146,30 +147,6 @@ public final class NexusMenus extends JavaPlugin implements SynkPlugin {
 
     private void initFolder() {
         if (!menusFolder.exists()) menusFolder.mkdir();
-    }
-
-    private void initConfig() {
-        if (!getDataFolder().exists()) getDataFolder().mkdir();
-
-        try {
-            if (!configFile.exists()) {
-                Files.copy(getResource("config.yml"), configFile.toPath());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        config = YamlConfiguration.loadConfiguration(configFile);
-    }
-    private void initMessages() {
-        if (!getDataFolder().exists()) getDataFolder().mkdir();
-
-        try {
-            if (!messagesFile.exists()) {
-                Files.copy(getResource("messages.yml"), messagesFile.toPath());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void initCooldown() {
@@ -246,7 +223,7 @@ public final class NexusMenus extends JavaPlugin implements SynkPlugin {
 
     @Override
     public String ver() {
-        return "1.0";
+        return "1.0.1";
     }
 
     @Override

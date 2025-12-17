@@ -6,7 +6,7 @@
 
     <groupId>cc.synkdev</groupId>
     <artifactId>NexusMenus</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>NexusMenus</name>
@@ -149,8 +149,9 @@
 
         <dependency>
             <groupId>cc.synkdev</groupId>
-            <artifactId>SynkLibs</artifactId>
-            <version>1.8.3</version>
+            <artifactId>NexusCore</artifactId>
+            <version>1.9.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

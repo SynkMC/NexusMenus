@@ -17,6 +17,6 @@ commands:
   require-operator: true
 permissions:
   require-op-for-menu-creation: true
-  menu-creation-permission: "simplemenus.create"
+  menu-creation-permission: "nexusmenus.create"
 behavior:
   auto-reload-menus: true
